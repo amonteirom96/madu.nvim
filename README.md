@@ -57,7 +57,7 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
   | Search, `TODO` / `FIXME` / `NOTE` markers | attention colors |
   | Statusline modes (`StMode*`) | normal **blue** · insert **green** · visual **red** · replace **orange** · command **azure** · other **cyan** |
 - **Easy on the eyes.** The dark variant is a blue-leaning slate (`#232833`)
-  with edge's cool off-white text; the light variant is a cool, blue-leaning paper (`#eef2f8`)
+  with edge's cool off-white text; the light variant is a warm, yellow-leaning paper (`#fdf6e3`)
   with edge's soft graphite. Every accent passes **WCAG AA (≥ 4.5:1)** on both the
   background and the selection color (`scripts/contrast.lua`).
 
@@ -251,11 +251,11 @@ require("onemono").setup({
 
 Taken from the Onedark family ([edge](https://github.com/sainnhe/edge)).
 The light accents keep edge light's hues, darkened just enough to pass WCAG AA
-on the cool paper background (from essential.nvim).
+on the warm paper background (from Solarized light).
 
 | Key | Light | Dark | Used for |
 | --- | --- | --- | --- |
-| `bg` | `#eef2f8` | `#232833` | background |
+| `bg` | `#fdf6e3` | `#232833` | background |
 | `fg` | `#4b505b` | `#c5cdd9` | **code** |
 | `green` | `#4d7128` | `#a0c980` | **strings**, git add, ok, snippets |
 | `blue` | `#3f67a9` | `#6cb6eb` | **functions**, git change, info, `accent` |
