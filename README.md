@@ -41,6 +41,9 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
   italic and a step dimmer than the code (still WCAG AA), and you can change
   both. Set `mono = true` for pure
   monochrome.
+- **Markdown uses the same four hues.** Headings vary by level (blue, yellow,
+  green, orange, blue, yellow); links are blue, inline code and quotes green,
+  bold text and list markers orange, and italic text yellow.
 - **Red means error.** It appears on diagnostics, error messages,
   `FIXME`/`BUG` markers, git deletions and the Visual mode block of the
   statusline, and nowhere in code.
