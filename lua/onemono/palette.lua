@@ -96,7 +96,9 @@ function M.get(variant, opts)
   c.comment = blend(blend(tint, c.fg, 0.35), c.bg, is_light and 0.84 or 0.7)
   c.bg_dim = is_light and blend(c.fg, c.bg, 0.03) or util.darken(c.bg, 0.12)
   c.bg_float = c.bg
-  c.accent = c.blue
+  -- A more saturated UI blue stands apart from graphite on warm light paper,
+  -- including matched text drawn over the current picker selection.
+  c.accent = is_light and "#005faf" or c.blue
   -- Tinted accent, same hue family as the UI so it stays clean. Stronger than
   -- surface3 so it reads apart from Visual.
   c.search = blend(c.accent, c.bg, is_light and 0.25 or 0.32)

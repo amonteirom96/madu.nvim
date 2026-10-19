@@ -5,7 +5,7 @@
 gui:
   theme:
     activeBorderColor:
-      - "#3f67a9"
+      - "#005faf"
       - "bold"
     inactiveBorderColor:
       - "#d3d0cf"
@@ -13,7 +13,7 @@ gui:
       - "#8c5d04"
       - "bold"
     optionsTextColor:
-      - "#3f67a9"
+      - "#005faf"
     selectedLineBgColor:
       - "#efe9dc"
     inactiveViewSelectedLineBgColor:
@@ -33,5 +33,5 @@ gui:
   authorColors:
     "*": "#4b505b"
   branchColors:
-    "main": "#3f67a9"
-    "master": "#3f67a9"
+    "main": "#005faf"
+    "master": "#005faf"

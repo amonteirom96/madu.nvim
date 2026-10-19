@@ -258,7 +258,8 @@ on the warm paper background (from Solarized light).
 | `bg` | `#fdf6e3` | `#232833` | background |
 | `fg` | `#4b505b` | `#c5cdd9` | **code** |
 | `green` | `#4d7128` | `#a0c980` | **strings**, git add, ok, snippets |
-| `blue` | `#3f67a9` | `#6cb6eb` | **functions**, git change, info, `accent` |
+| `blue` | `#3f67a9` | `#6cb6eb` | **functions**, git change, info |
+| `accent` | `#005faf` | `#6cb6eb` | UI matches, prompts, search |
 | `red` | `#b33c3c` | `#f5898e` | **errors only**, git delete |
 | `orange` | `#9b5522` | `#e0a06e` | **constants and literals**, kinds (enum, constant), substitute |
 | `yellow` | `#8c5d04` | `#deb974` | **types**, warnings, kinds (class, struct) |
