@@ -57,7 +57,7 @@ Defaults:
       dim_inactive = false,
       muted_comments = false,
       mono = false,            -- all code in fg
-      float = { solid = false },
+      float = { solid = true },
       styles = {
         comments = { italic = true },
         keywords = { bold = true },

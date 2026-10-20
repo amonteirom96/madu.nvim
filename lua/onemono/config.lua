@@ -23,7 +23,7 @@ M.defaults = {
   dim_inactive = false,
   muted_comments = false,
   mono = false,
-  float = { solid = false },
+  float = { solid = true },
   styles = {
     comments = { italic = true },
     keywords = { bold = true },
