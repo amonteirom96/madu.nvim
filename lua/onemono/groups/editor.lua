@@ -6,7 +6,9 @@ return function(c, o)
   local blend = util.blend
   local bg = o.transparent and c.none or c.bg
   local float_bg = o.transparent and c.none or (o.float.solid and c.surface_float or c.bg_float)
-  local float_border = { fg = o.float.solid and blend(c.fg, c.surface_float, 0.14) or c.border, bg = float_bg }
+  -- Rounded border glyphs leave space around their strokes. Match that space
+  -- to the editor so the popup background does not form a square outer band.
+  local float_border = { fg = o.float.solid and blend(c.fg, c.surface_float, 0.14) or c.border, bg = bg }
 
   local hl = {
     -- Base -------------------------------------------------------------------
