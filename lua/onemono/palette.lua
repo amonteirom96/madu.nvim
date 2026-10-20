@@ -52,6 +52,7 @@ M.base = {
 ---@field variant "light"|"dark"
 ---@field none "NONE"
 ---@field bg_float string
+---@field surface_float string elevated popup background
 ---@field bg_dim string      background for inactive windows (dim_inactive)
 ---@field surface1 string    cursorline, subtle rows
 ---@field surface2 string    selection, active tab, statusline
@@ -96,6 +97,7 @@ function M.get(variant, opts)
   c.comment = blend(blend(tint, c.fg, 0.35), c.bg, is_light and 0.84 or 0.7)
   c.bg_dim = is_light and blend(c.fg, c.bg, 0.03) or util.darken(c.bg, 0.12)
   c.bg_float = c.bg
+  c.surface_float = is_light and util.lighten(c.bg, 0.80) or util.darken(c.bg, 0.25)
   -- A more saturated UI blue stands apart from graphite on warm light paper,
   -- including matched text drawn over the current picker selection.
   c.accent = is_light and "#005faf" or c.blue
