@@ -5,8 +5,8 @@ local util = require("onemono.util")
 return function(c, o)
   local blend = util.blend
   local bg = o.transparent and c.none or c.bg
-  local float_bg = o.transparent and c.none or (o.float.solid and c.surface1 or c.bg_float)
-  local float_border = o.float.solid and { fg = c.surface1, bg = float_bg } or { fg = c.border, bg = float_bg }
+  local float_bg = o.transparent and c.none or (o.float.solid and c.surface2 or c.bg_float)
+  local float_border = { fg = c.border, bg = float_bg }
 
   local hl = {
     -- Base -------------------------------------------------------------------

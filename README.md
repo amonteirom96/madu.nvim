@@ -150,7 +150,7 @@ require("onemono").setup({
   muted_comments = false,    -- comments even fainter, in the muted UI tone
   mono = false,              -- all code in the foreground color (pure monochrome)
   float = {
-    solid = true,            -- filled floats with an invisible border
+    solid = true,            -- raised background with a subtle border
   },
   styles = {                 -- any nvim_set_hl attributes (bold, italic, underline…)
     comments = { italic = true },

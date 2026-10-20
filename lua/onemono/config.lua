@@ -10,7 +10,7 @@ local M = {}
 ---@field dim_inactive? boolean                 slightly different bg on unfocused windows
 ---@field muted_comments? boolean               comments even fainter, in the muted UI tone
 ---@field mono? boolean                         all code in fg (pure monochrome)
----@field float? { solid?: boolean }            solid = filled floats without visible border
+---@field float? { solid?: boolean }            solid = raised background with a subtle border
 ---@field styles? table<"comments"|"keywords"|"functions"|"variables"|"strings"|"types"|"constants"|"operators", onemono.Style>
 ---@field integrations? table<string, boolean>
 ---@field cache? boolean                        compile highlights to bytecode (recommended)
