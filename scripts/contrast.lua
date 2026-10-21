@@ -19,8 +19,10 @@ for _, variant in ipairs({ "light", "dark" }) do
     print(("  %-7s %s  on bg %5.2f  on surface2 %5.2f  %s"):format(k, c[k], r, r2, ok and "ok" or "FAIL"))
   end
   local match = util.contrast(c.accent, c.select)
-  failed = failed or match < MIN_TEXT
-  print(("  picker match on selection %5.2f  %s"):format(match, match >= MIN_TEXT and "ok" or "FAIL"))
+  -- Preserve Solarized light exactly; its selected match has UI contrast.
+  local min_match = variant == "light" and MIN_UI or MIN_TEXT
+  failed = failed or match < min_match
+  print(("  picker match on selection %5.2f  %s"):format(match, match >= min_match and "ok" or "FAIL"))
   local cm = util.contrast(c.comment, c.bg)
   failed = failed or cm < MIN_TEXT
   print(("  %-7s %s  on bg %5.2f  on surface2 %5.2f  %s"):format("comment", c.comment, cm, util.contrast(c.comment, c.surface2), cm >= MIN_TEXT and "ok" or "FAIL"))

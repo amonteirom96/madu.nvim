@@ -19,7 +19,7 @@ return function(c, o)
   local modes = {
     Normal = c.blue,
     Insert = c.green,
-    Visual = c.red,
+    Visual = c.variant == "light" and c.cyan or c.red,
     Replace = c.orange,
     Command = c.azure,
     Other = c.cyan,

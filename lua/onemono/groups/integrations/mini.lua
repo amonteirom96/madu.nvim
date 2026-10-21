@@ -3,7 +3,9 @@
 ---@param o onemono.Config
 return function(c, o)
   local util = require("onemono.util")
-  local float_bg = o.transparent and c.none or (o.float.solid and c.surface_float or c.bg_float)
+  local solid = o.float.solid
+  if solid == nil then solid = c.variant == "dark" end
+  local float_bg = o.transparent and c.none or (solid and c.surface_float or c.bg_float)
   local bg = o.transparent and c.none or c.bg
 
   return {

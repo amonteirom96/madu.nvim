@@ -5,10 +5,16 @@ local util = require("onemono.util")
 return function(c, o)
   local blend = util.blend
   local bg = o.transparent and c.none or c.bg
-  local float_bg = o.transparent and c.none or (o.float.solid and c.surface_float or c.bg_float)
+  local solid = o.float.solid
+  if solid == nil then solid = c.variant == "dark" end
+  local float_bg = o.transparent and c.none or (solid and c.surface_float or c.bg_float)
   -- Rounded border glyphs leave space around their strokes. Match that space
   -- to the editor so the popup background does not form a square outer band.
-  local float_border = { fg = o.float.solid and blend(c.fg, c.surface_float, 0.14) or c.border, bg = bg }
+  local float_border = { fg = solid and blend(c.fg, c.surface_float, 0.14) or c.border, bg = bg }
+
+  if c.variant == "light" then
+    float_border = solid and { fg = c.surface1, bg = float_bg } or { fg = c.border, bg = float_bg }
+  end
 
   local hl = {
     -- Base -------------------------------------------------------------------
@@ -149,7 +155,7 @@ return function(c, o)
     RedrawDebugNormal = { reverse = true },
     RedrawDebugClear = { bg = c.yellow },
     RedrawDebugComposed = { bg = c.green },
-    RedrawDebugRecompose = { bg = c.red },
+    RedrawDebugRecompose = { bg = c.variant == "light" and c.orange or c.red },
   }
 
   for name, color in pairs({ Error = c.diag.error, Warn = c.diag.warn, Info = c.diag.info, Hint = c.diag.hint, Ok = c.diag.ok }) do

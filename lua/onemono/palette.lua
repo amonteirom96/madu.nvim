@@ -2,7 +2,7 @@ local util = require("onemono.util")
 
 local M = {}
 
---- Base palettes, taken from the Onedark family (sainnhe/edge). Everything
+--- Solarized light and Onedark-family dark base palettes. Everything
 --- else is derived from these nine colors.
 --- `fg` is the color used for code. Four token kinds get a hue: strings (green),
 --- functions (blue), types (yellow) and constants/literals (orange), the same
@@ -12,17 +12,15 @@ local M = {}
 ---@type table<"light"|"dark", onemono.BasePalette>
 M.base = {
   light = {
-    bg = "#fdf6e3", -- solarized light: warm, yellow-leaning paper
-    fg = "#4b505b", -- edge light: soft graphite
-    -- Accents keep edge light's hue and saturation, darkened just enough to
-    -- pass WCAG AA on bg and surface2.
-    red = "#b33c3c",
-    orange = "#9b5522",
-    yellow = "#8c5d04",
-    green = "#4d7128",
-    cyan = "#2f716b",
-    azure = "#545dc0",
-    blue = "#3f67a9",
+    bg = "#fdf6e3",
+    fg = "#52676f",
+    red = "#c62d2a",
+    orange = "#b64314",
+    yellow = "#846400",
+    green = "#616f00",
+    cyan = "#1e746e",
+    azure = "#1e6da5",
+    blue = "#1e6da5",
   },
   dark = {
     bg = "#232833", -- essential dark: slate leaning to blue
@@ -80,9 +78,8 @@ function M.get(variant, opts)
   c.variant = variant
   c.none = "NONE"
 
-  -- UI surfaces lean slightly blue, like edge's bg1..bg4. Alphas are tuned to
-  -- land on those values.
-  local tint = blend(c.azure, c.fg, 0.5)
+  -- Light follows Solarized neutral surfaces; dark keeps its blue lean.
+  local tint = is_light and c.fg or blend(c.azure, c.fg, 0.5)
   c.surface1 = blend(tint, c.bg, is_light and 0.05 or 0.06)
   c.surface2 = blend(tint, c.bg, is_light and 0.08 or 0.085)
   c.surface3 = blend(tint, c.bg, is_light and 0.14 or 0.13)
@@ -91,18 +88,16 @@ function M.get(variant, opts)
   -- perceived lightness step from bg in light and dark).
   c.select = c.surface3
   c.border = blend(tint, c.bg, is_light and 0.24 or 0.22)
-  c.muted = blend(c.fg, c.bg, is_light and 0.64 or 0.50)
+  c.muted = blend(c.fg, c.bg, is_light and 0.76 or 0.50)
   -- Comments step back from the code without dropping below AA (4.5:1): fg
   -- with the UI's blue lean, faded toward bg. Italic does the rest.
-  c.comment = blend(blend(tint, c.fg, 0.35), c.bg, is_light and 0.84 or 0.7)
+  c.comment = blend(blend(tint, c.fg, 0.35), c.bg, is_light and 0.95 or 0.7)
   c.bg_dim = is_light and blend(c.fg, c.bg, 0.03) or util.darken(c.bg, 0.12)
   c.bg_float = c.bg
-  -- Keep light popups in the paper's warm hue instead of washing it out
-  -- toward neutral white; a slightly deeper cream separates borderless menus.
-  c.surface_float = is_light and blend("#e9ce8b", c.bg, 0.25) or util.darken(c.bg, 0.25)
-  -- A more saturated UI blue stands apart from graphite on warm light paper,
-  -- including matched text drawn over the current picker selection.
-  c.accent = is_light and "#005faf" or c.blue
+  -- Solarized light uses surface1 for raised popups.
+  c.surface_float = is_light and c.surface1 or util.darken(c.bg, 0.25)
+  -- Use the palette blue for UI matches and prompts.
+  c.accent = c.blue
   -- Tinted accent, same hue family as the UI so it stays clean. Stronger than
   -- surface3 so it reads apart from Visual.
   c.search = blend(c.accent, c.bg, is_light and 0.25 or 0.32)

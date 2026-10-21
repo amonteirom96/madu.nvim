@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>Onedark, quieted down.</b><br>
-  A quiet take on the Onedark palette: four hues for code, and red only for errors and deletions.
+  Onedark dark and Solarized light: four hues for code, and red only for errors and deletions.
 </p>
 
 <p align="center">
@@ -41,7 +41,7 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
   italic and a step dimmer than the code (still WCAG AA), and you can change
   both. Set `mono = true` for pure
   monochrome.
-- **Markdown uses the same four hues.** Headings vary by level (blue, yellow,
+- **Dark Markdown uses the same four hues.** Light Markdown follows Solarized with monochrome text. Headings vary by level (blue, yellow,
   green, orange, blue, yellow); links are blue, inline code and quotes green,
   bold text and list markers orange, and italic text yellow.
 - **Red means error.** It appears on diagnostics, error messages,
@@ -58,10 +58,10 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
   | LSP completion kinds (blink.cmp, dropbar) | one color per kind, the same everywhere and the same as in the code |
   | File icons (mini.icons) | icon colors, with red folded into orange and purple into azure |
   | Search, `TODO` / `FIXME` / `NOTE` markers | attention colors |
-  | Statusline modes (`StMode*`) | normal **blue** · insert **green** · visual **red** · replace **orange** · command **azure** · other **cyan** |
+  | Statusline modes (`StMode*`) | normal **blue** · insert **green** · visual **red in dark / cyan in light** · replace **orange** · command **azure** · other **cyan** |
 - **Easy on the eyes.** The dark variant is a blue-leaning slate (`#232833`)
   with edge's cool off-white text; the light variant is a warm, yellow-leaning paper (`#fdf6e3`)
-  with edge's soft graphite. Every accent passes **WCAG AA (≥ 4.5:1)** on both the
+  with Solarized blue-gray text. Selected picker matches retain Solarized light’s 4.27:1 contrast (dark: ≥ 4.5:1). Every accent passes **WCAG AA (≥ 4.5:1)** on both the
   background and the selection color (`scripts/contrast.lua`).
 
 ## Features
@@ -150,7 +150,8 @@ require("onemono").setup({
   muted_comments = false,    -- comments even fainter, in the muted UI tone
   mono = false,              -- all code in the foreground color (pure monochrome)
   float = {
-    solid = true,            -- raised background with a subtle border
+    -- solid defaults to false in light, true in dark
+    -- solid = true,          -- override for both variants
   },
   styles = {                 -- any nvim_set_hl attributes (bold, italic, underline…)
     comments = { italic = true },
@@ -253,23 +254,23 @@ require("onemono").setup({
 ## Palette
 
 Taken from the Onedark family ([edge](https://github.com/sainnhe/edge)).
-The light accents keep edge light's hues, darkened just enough to pass WCAG AA
-on the warm paper background (from Solarized light).
+The light palette and highlights match the local solarized.nvim light theme;
+the dark variant retains its Onedark palette. Both are compiled into the same cache.
 
 | Key | Light | Dark | Used for |
 | --- | --- | --- | --- |
 | `bg` | `#fdf6e3` | `#232833` | background |
-| `fg` | `#4b505b` | `#c5cdd9` | **code** |
-| `green` | `#4d7128` | `#a0c980` | **strings**, git add, ok, snippets |
-| `blue` | `#3f67a9` | `#6cb6eb` | **functions**, git change, info |
-| `accent` | `#005faf` | `#6cb6eb` | UI matches, prompts, search |
-| `red` | `#b33c3c` | `#f5898e` | **errors only**, git delete |
-| `orange` | `#9b5522` | `#e0a06e` | **constants and literals**, kinds (enum, constant), substitute |
-| `yellow` | `#8c5d04` | `#deb974` | **types**, warnings, kinds (class, struct) |
-| `cyan` | `#2f716b` | `#5dbbc1` | hints, kinds (field, property) |
-| `azure` | `#545dc0` | `#96a8ee` | kinds (module, keyword), ANSI magenta |
+| `fg` | `#52676f` | `#c5cdd9` | **code** |
+| `green` | `#616f00` | `#a0c980` | **strings**, git add, ok, snippets |
+| `blue` | `#1e6da5` | `#6cb6eb` | **functions**, git change, info |
+| `accent` | `#1e6da5` | `#6cb6eb` | UI matches, prompts, search |
+| `red` | `#c62d2a` | `#f5898e` | **errors only**, git delete |
+| `orange` | `#b64314` | `#e0a06e` | **constants and literals**, kinds (enum, constant), substitute |
+| `yellow` | `#846400` | `#deb974` | **types**, warnings, kinds (class, struct) |
+| `cyan` | `#1e746e` | `#5dbbc1` | hints, kinds (field, property) |
+| `azure` | `#1e6da5` | `#96a8ee` | kinds (module, keyword), ANSI magenta |
 
-UI tones are derived from `fg` and `bg`, with a slight blue lean like edge's
+UI tones are derived from `fg` and `bg`, neutral in light and with a blue lean in dark like edge's
 `bg1`..`bg4`: `surface1`, `surface2`, `surface3`, `border`, `muted` and
 `bg_dim`. `comment` is `fg` faded toward the background, kept above 4.5:1.
 `muted` appears only in UI chrome, such as line numbers and
