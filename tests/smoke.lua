@@ -66,7 +66,7 @@ for _, v in ipairs({ "light", "dark" }) do
   }
   for n, spec in pairs(ex.highlights(v)) do
     local red = spec.fg == c.red or spec.bg == c.red or spec.sp == c.red
-    local meaning = n:find("Error") or n:find("Delete") or n:find("Removed") or n:find("Remove") or n:find("[Dd]iff") or n:find("minus") or n:find("Topdelete")
+    local meaning = n:lower():find("error") or n:lower():find("deleted") or n:find("Fixme") or n:find("OldFile") or n:find("Delete") or n:find("Removed") or n:find("Remove") or n:find("[Dd]iff") or n:find("minus") or n:find("Topdelete")
     check(not red or allowed[n] or meaning, ("%s: %s uses red outside errors/deletions"):format(v, n))
   end
   check(c.purple == nil, v .. ": no purple in the palette")

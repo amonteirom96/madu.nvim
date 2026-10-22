@@ -21,10 +21,13 @@ M.integrations = {
 ---@param o madu.Config
 ---@return table<string, madu.Style>
 function M.get(c, o)
-  local hl = {}
+  local coverage = require("madu.groups.coverage")
+  local hl = coverage.get(c, o)
+  local own = {}
   local function add(mod)
     for name, spec in pairs(require("madu.groups." .. mod)(c, o)) do
       hl[name] = spec
+      own[name] = true
     end
   end
 
@@ -36,6 +39,8 @@ function M.get(c, o)
       add(mod)
     end
   end
+
+  coverage.preserve_syntax(hl, own)
 
   if o.on_highlights then
     o.on_highlights(hl, c, c.variant)

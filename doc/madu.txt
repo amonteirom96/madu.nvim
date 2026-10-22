@@ -136,4 +136,21 @@ extras/kitty/madu-{light,dark}.conf
 extras/lazygit/madu-{light,dark}.yml
     Merge into config.yml, or append to LG_CONFIG_FILE.
 
+
+EXTENDED COVERAGE                                      *madu-coverage*
+
+TokyoNight's highlight coverage is bundled and adapted to Madu's palette in
+both variants. No TokyoNight dependency is required. See THIRD_PARTY.md for
+the pinned revision and license, and lua/madu/groups/support_modules.lua for
+the complete list. Additional modules are enabled by default and can be
+disabled with integrations = { telescope = false, ["neo-tree"] = false }.
+Existing integration keys keep working; mini = false disables all mini modules.
+
+Lualine: options = { theme = "madu" }
+Lightline: let g:lightline = { 'colorscheme': 'madu' }
+
+Dark popups use surface1. The inccommand=split substitution preview uses the
+MaduPreview highlight (surface2), also with transparency enabled. The theme
+does not change inccommand. Customize MaduPreview through on_highlights.
+
  vim:tw=78:ts=8:ft=help:norl:

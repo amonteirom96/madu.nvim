@@ -348,3 +348,36 @@ variant of Atom's One Dark. Structure based on
 ## License
 
 [MIT](LICENSE)
+
+## Expanded highlight coverage
+
+Madu includes the editor, Tree-sitter, semantic-token and plugin highlight
+coverage adapted from [TokyoNight](https://github.com/folke/tokyonight.nvim).
+Both variants use Madu's own palette and existing syntax styles. TokyoNight
+is not required. Source revision and license: [THIRD_PARTY.md](THIRD_PARTY.md).
+
+This includes Telescope, Snacks, Noice, nvim-cmp, blink.cmp, Neo-tree,
+nvim-tree, bufferline, barbar, DAP, Trouble, which-key, aerial, navic,
+render-markdown, notifications, Git integrations and all upstream mini modules.
+The complete module list is in `lua/madu/groups/support_modules.lua`.
+Additional integrations are enabled by default. Disable a module by its name,
+for example `integrations = { telescope = false, ["neo-tree"] = false }`.
+Existing keys such as `grug_far` and `mini` keep working; `mini = false`
+disables all mini modules.
+
+Lualine: `require("lualine").setup({ options = { theme = "madu" } })`.
+Lightline: `let g:lightline = { 'colorscheme': 'madu' }`.
+
+Dark popups and floats use the existing `surface1` background instead of a
+background 25% darker than the editor. The `inccommand=split` substitution
+preview uses `MaduPreview` (`surface2`) in both variants, including with
+transparency enabled, so the result panel remains distinct. Madu does not
+change your `inccommand` option.
+
+Validation:
+
+```sh
+nvim --headless -u NONE --cmd 'set rtp^=.' -l tests/smoke.lua
+nvim --headless -u NONE --cmd 'set rtp^=.' -l tests/coverage.lua
+nvim -u NONE -i NONE --cmd 'set rtp^=.' -c "lua dofile('tests/preview.lua')"
+```

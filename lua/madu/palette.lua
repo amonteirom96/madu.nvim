@@ -93,9 +93,9 @@ function M.get(variant, opts)
   -- with the UI's blue lean, faded toward bg. Italic does the rest.
   c.comment = blend(blend(tint, c.fg, 0.35), c.bg, is_light and 0.95 or 0.7)
   c.bg_dim = is_light and blend(c.fg, c.bg, 0.03) or util.darken(c.bg, 0.12)
-  c.bg_float = c.bg
-  -- Solarized light uses surface1 for raised popups.
-  c.surface_float = is_light and c.surface1 or util.darken(c.bg, 0.25)
+  c.bg_float = is_light and c.bg or c.surface1
+  -- Raised popups use an existing surface, keeping the palette intact.
+  c.surface_float = c.surface1
   -- Use the palette blue for UI matches and prompts.
   c.accent = c.blue
   -- Tinted accent, same hue family as the UI so it stays clean. Stronger than

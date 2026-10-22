@@ -12,7 +12,7 @@ local M = {}
 ---@field mono? boolean                         all code in fg (pure monochrome)
 ---@field float? { solid?: boolean }            solid = raised background with a subtle border
 ---@field styles? table<"comments"|"keywords"|"functions"|"variables"|"strings"|"types"|"constants"|"operators", madu.Style>
----@field integrations? table<string, boolean>
+---@field integrations? table<string, boolean> original keys and names in groups/support_modules.lua
 ---@field cache? boolean                        compile highlights to bytecode (recommended)
 ---@field on_colors? fun(colors: madu.Colors, variant: madu.Variant)
 ---@field on_highlights? fun(hl: table<string, madu.Style>, colors: madu.Colors, variant: madu.Variant)

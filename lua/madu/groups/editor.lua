@@ -20,6 +20,7 @@ return function(c, o)
     -- Base -------------------------------------------------------------------
     Normal = { fg = c.fg, bg = bg },
     NormalNC = { fg = c.fg, bg = (o.dim_inactive and not o.transparent) and c.bg_dim or bg },
+    MaduPreview = { fg = c.fg, bg = c.surface2 },
     NormalFloat = { fg = c.fg, bg = float_bg },
     FloatBorder = float_border,
     FloatTitle = { fg = c.fg, bg = float_bg, bold = true },
