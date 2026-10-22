@@ -9,7 +9,7 @@
 <text x="170" y="42" fill="#7b898b"><tspan fill="#1e6da5">●</tspan> init.lua</text>
 <text x="614" y="42" fill="#7b898b" font-family="'Inter','SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" text-anchor="end" letter-spacing="2">LIGHT</text>
 <text x="60" y="81" text-anchor="end" fill="#7b898b">1</text>
-<text x="72" y="81" fill="#52676f" xml:space="preserve"><tspan font-weight="700">local</tspan> util = <tspan fill="#1e6da5">require</tspan>(<tspan fill="#616f00">"onemono.util"</tspan>)</text>
+<text x="72" y="81" fill="#52676f" xml:space="preserve"><tspan font-weight="700">local</tspan> util = <tspan fill="#1e6da5">require</tspan>(<tspan fill="#616f00">"madu.util"</tspan>)</text>
 <text x="60" y="107" text-anchor="end" fill="#7b898b">2</text>
 <text x="72" y="107" fill="#52676f" xml:space="preserve"></text>
 <text x="60" y="133" text-anchor="end" fill="#7b898b">3</text>
@@ -68,7 +68,7 @@
 <rect x="21" y="446" width="608" height="34" fill="#efebda"/>
 <rect x="21" y="446" width="70" height="34" fill="#1e6da5"/>
 <text x="40" y="468" fill="#fdf6e3" font-weight="700">NOR</text>
-<text x="106" y="468" fill="#1e6da5">[onemono]  <tspan fill="#c62d2a">E:1</tspan> <tspan fill="#846400">W:2</tspan></text>
+<text x="106" y="468" fill="#1e6da5">[madu]  <tspan fill="#c62d2a">E:1</tspan> <tspan fill="#846400">W:2</tspan></text>
 <text x="614" y="468" fill="#52676f" text-anchor="end"><tspan fill="#616f00"> main</tspan>  <tspan fill="#1e6da5">●</tspan> lua  8:14</text>
 </g>
 <rect x="20" y="20" width="610" height="460" rx="14" fill="none" stroke="#d4d4c7"/>
@@ -82,7 +82,7 @@
 <text x="800" y="42" fill="#747b86"><tspan fill="#96a8ee">●</tspan> init.lua</text>
 <text x="1244" y="42" fill="#747b86" font-family="'Inter','SF Pro Display','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" text-anchor="end" letter-spacing="2">DARK</text>
 <text x="690" y="81" text-anchor="end" fill="#747b86">1</text>
-<text x="702" y="81" fill="#c5cdd9" xml:space="preserve"><tspan font-weight="700">local</tspan> util = <tspan fill="#6cb6eb">require</tspan>(<tspan fill="#a0c980">"onemono.util"</tspan>)</text>
+<text x="702" y="81" fill="#c5cdd9" xml:space="preserve"><tspan font-weight="700">local</tspan> util = <tspan fill="#6cb6eb">require</tspan>(<tspan fill="#a0c980">"madu.util"</tspan>)</text>
 <text x="690" y="107" text-anchor="end" fill="#747b86">2</text>
 <text x="702" y="107" fill="#c5cdd9" xml:space="preserve"></text>
 <text x="690" y="133" text-anchor="end" fill="#747b86">3</text>
@@ -141,7 +141,7 @@
 <rect x="651" y="446" width="608" height="34" fill="#2f3442"/>
 <rect x="651" y="446" width="70" height="34" fill="#6cb6eb"/>
 <text x="670" y="468" fill="#232833" font-weight="700">NOR</text>
-<text x="736" y="468" fill="#6cb6eb">[onemono]  <tspan fill="#f5898e">E:1</tspan> <tspan fill="#deb974">W:2</tspan></text>
+<text x="736" y="468" fill="#6cb6eb">[madu]  <tspan fill="#f5898e">E:1</tspan> <tspan fill="#deb974">W:2</tspan></text>
 <text x="1244" y="468" fill="#c5cdd9" text-anchor="end"><tspan fill="#a0c980"> main</tspan>  <tspan fill="#6cb6eb">●</tspan> lua  8:14</text>
 </g>
 <rect x="650" y="20" width="610" height="460" rx="14" fill="none" stroke="#42485a"/>

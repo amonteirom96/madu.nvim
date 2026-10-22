@@ -1,15 +1,15 @@
 -- nvim --headless -u NONE --cmd "set rtp^=." -l scripts/bench.lua
-require("onemono").clear_cache()
+require("madu").clear_cache()
 local hr = vim.uv.hrtime
 local function ms(t) return (hr() - t) / 1e6 end
 
 local t = hr()
-vim.cmd.colorscheme("onemono-dark")
+vim.cmd.colorscheme("madu-dark")
 print(("cold (build + compile + write): %.3f ms"):format(ms(t)))
 
 local N = 200
 t = hr()
-for _ = 1, N do vim.cmd.colorscheme("onemono-dark") end
+for _ = 1, N do vim.cmd.colorscheme("madu-dark") end
 print(("cached (avg of %d):             %.3f ms"):format(N, ms(t) / N))
 
 t = hr()

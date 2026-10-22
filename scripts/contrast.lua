@@ -1,8 +1,8 @@
 -- Validates WCAG contrast of every palette color against its background.
 -- Usage: nvim --headless -u NONE --cmd "set rtp^=." -l scripts/contrast.lua
 
-local util = require("onemono.util")
-local palette = require("onemono.palette")
+local util = require("madu.util")
+local palette = require("madu.palette")
 
 local MIN_TEXT, MIN_UI = 4.5, 3.0
 local keys = { "fg", "red", "orange", "yellow", "green", "cyan", "azure", "blue", "accent" }

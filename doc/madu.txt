@@ -1,0 +1,139 @@
+*madu.txt*    Onedark, quieted down. Four hues for code, red for errors.
+
+==============================================================================
+CONTENTS                                                   *madu-contents*
+
+  1. Introduction ............................ |madu-introduction|
+  2. Usage ................................... |madu-usage|
+  3. Configuration ........................... |madu-config|
+  4. Commands ................................ |madu-commands|
+  5. API ..................................... |madu-api|
+  6. Extras .................................. |madu-extras|
+
+==============================================================================
+1. INTRODUCTION                                        *madu-introduction*
+
+Named in honor of my wife: my perfect theme, dedicated to the woman who is
+perfect for me and our family.
+
+Madu is a quiet take on the Onedark palette (sainnhe/edge). Code uses a
+single foreground color, except strings (green), functions (blue), types
+(yellow) and constants/literals (orange). Keywords and comments are told
+apart by style (bold keywords; italic comments a step dimmer than the code,
+still WCAG AA), not by hue.
+Red is reserved for errors and git deletions; there is no purple or pink.
+Color is otherwise used only where it carries meaning:
+
+  - git: add = green, change = blue, delete = red
+  - diagnostics: error, warn, info, hint, ok
+  - LSP completion and symbol kinds (blink.cmp, dropbar)
+  - file icons (mini.icons)
+  - search and TODO/FIXME/NOTE markers
+
+Highlights are compiled to LuaJIT bytecode and cached, so a cached load takes
+a few milliseconds.
+
+==============================================================================
+2. USAGE                                                      *madu-usage*
+
+>lua
+    require("madu").setup({})   -- optional
+    vim.cmd.colorscheme("madu")
+<
+                                  *madu* *madu-light* *madu-dark*
+  madu         follows 'background' (or the `variant` option)
+  madu-light   always light
+  madu-dark    always dark
+
+Neovim detects the terminal background at startup. When you use `madu`,
+the theme follows the terminal and switches when 'background' changes.
+
+==============================================================================
+3. CONFIGURATION                                             *madu-config*
+
+Defaults:
+>lua
+    require("madu").setup({
+      variant = "auto",        -- "auto" | "light" | "dark"
+      transparent = false,
+      terminal_colors = true,
+      dim_inactive = false,
+      muted_comments = false,
+      mono = false,            -- all code in fg
+      float = { solid = true },
+      styles = {
+        comments = { italic = true },
+        keywords = { bold = true },
+        functions = {}, variables = {}, strings = {},
+        types = {}, constants = {}, operators = {},
+      },
+      integrations = {
+        blink = true, dropbar = true, gitsigns = true, grug_far = true,
+        lazy = true, mason = true, mini = true,
+        semantic_tokens = true, statusline = true, treesitter = true,
+      },
+      cache = true,
+      on_colors = nil,         -- fun(colors, variant)
+      on_highlights = nil,     -- fun(hl, colors, variant)
+    })
+<
+                                                          *madu-on_colors*
+on_colors(colors, variant)
+    Change the palette before highlights are built. Keys: `bg`, `fg`, `red`,
+    `orange`, `yellow`, `green`, `cyan`, `azure`, `blue`, `accent`,
+    `surface1`, `surface2`, `surface3`, `select`, `border`, `muted`, `comment`,
+    `bg_dim`, `bg_float`, `code.{string,func,type,constant}`,
+    `git.{add,change,delete}`, `diag.{error,warn,info,hint,ok}`.
+
+                                                               *madu-mono*
+mono
+    When true, strings, functions, types and constants use `fg` like the
+    rest of the code.
+
+                                                      *madu-on_highlights*
+on_highlights(hl, colors, variant)
+    Change or add highlight groups. `hl` maps group names to
+    |nvim_set_hl()| specs, with colors as "#rrggbb" strings.
+
+The compiled cache is keyed by a hash of your options, so changes take effect
+on the next `:colorscheme`. The hash covers function bodies but not captured
+upvalues. If you change such a value, run |:MaduCompile|.
+
+==============================================================================
+4. COMMANDS                                                *madu-commands*
+
+                                                            *:MaduCompile*
+:MaduCompile       Delete and rebuild the compiled cache, then reload.
+
+                                                         *:MaduClearCache*
+:MaduClearCache    Delete the compiled cache.
+
+                                                             *:MaduExtras*
+:MaduExtras [dir]  Write the Ghostty, Kitty and Lazygit themes to [dir]
+                        (default: the plugin's `extras/` directory).
+
+==============================================================================
+5. API                                                          *madu-api*
+
+require("madu").setup({opts})         Configure.
+require("madu").load({name})          Apply a colorscheme by name.
+require("madu").colors({variant})     Return the full palette.
+require("madu").highlights({variant}) Return the final highlight table.
+require("madu").compile()             Same as |:MaduCompile|.
+require("madu").clear_cache()         Same as |:MaduClearCache|.
+require("madu").extras({dir})         Same as |:MaduExtras|.
+
+==============================================================================
+6. EXTRAS                                                    *madu-extras*
+
+extras/ghostty/madu-{light,dark}
+    Copy to ~/.config/ghostty/themes/ and set:
+    `theme = light:madu-light,dark:madu-dark`
+
+extras/kitty/madu-{light,dark}.conf
+    Copy to ~/.config/kitty/{light,dark}-theme.auto.conf.
+
+extras/lazygit/madu-{light,dark}.yml
+    Merge into config.yml, or append to LG_CONFIG_FILE.
+
+ vim:tw=78:ts=8:ft=help:norl:

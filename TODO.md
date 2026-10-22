@@ -1,4 +1,4 @@
-# onemono.nvim — TODO
+# Madu.nvim — TODO
 
 > Onedark silencioso. Strings em verde, funções em azul, tipos em amarelo, constantes em laranja, vermelho só para erro.
 
@@ -19,8 +19,8 @@
 
 ## Core (herdado do essential.nvim)
 - [x] Compilação para bytecode em cache, chaveado por hash da config + versão.
-- [x] `onemono`, `onemono-light`, `onemono-dark`; troca automática via `background`.
-- [x] `:OnemonoCompile` / `:OnemonoClearCache` / `:OnemonoExtras`.
+- [x] `madu`, `madu-light`, `madu-dark`; troca automática via `background`.
+- [x] `:MaduCompile` / `:MaduClearCache` / `:MaduExtras`.
 
 ## Integrações
 - [x] blink.cmp, mini.icons/pick/extra/files/tabline, gitsigns, dropbar, grug-far, mason, lazy.nvim, nvim-treesitter, semantic tokens.
@@ -29,4 +29,4 @@
 - [x] Ghostty, Kitty, Lazygit (light/dark) gerados da paleta.
 
 ## Documentação
-- [x] README, `doc/onemono.txt`, banner e preview gerados da paleta.
+- [x] README, `doc/madu.txt`, banner e preview gerados da paleta.

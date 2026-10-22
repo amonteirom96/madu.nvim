@@ -5,9 +5,9 @@ local function check(cond, msg)
 end
 
 vim.env.XDG_CACHE_HOME = vim.fn.tempname()
-local ex = require("onemono")
+local ex = require("madu")
 
-for _, name in ipairs({ "onemono-light", "onemono-dark", "onemono" }) do
+for _, name in ipairs({ "madu-light", "madu-dark", "madu" }) do
   local ok, err = pcall(vim.cmd.colorscheme, name)
   check(ok, name .. ": " .. tostring(err))
   check(vim.g.colors_name == name, name .. ": colors_name=" .. tostring(vim.g.colors_name))
@@ -38,8 +38,8 @@ for _, name in ipairs({ "onemono-light", "onemono-dark", "onemono" }) do
   check(vim.g.terminal_color_1 ~= nil, name .. ": terminal colors")
 end
 
--- background switch follows for "onemono"
-vim.cmd.colorscheme("onemono")
+-- background switch follows for "madu"
+vim.cmd.colorscheme("madu")
 vim.o.background = "light"
 local light_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
 check(light_bg == tonumber(ex.colors("light").bg:sub(2), 16), "auto variant follows background=light")
@@ -47,13 +47,13 @@ vim.o.background = "dark"
 check(vim.api.nvim_get_hl(0, { name = "Normal" }).bg == tonumber(ex.colors("dark").bg:sub(2), 16), "auto variant follows background=dark")
 
 -- cache written and setup invalidates key
-local dir = vim.fn.stdpath("cache") .. "/onemono"
+local dir = vim.fn.stdpath("cache") .. "/madu"
 check(#vim.fn.readdir(dir) >= 3, "cache files exist")
 ex.setup({ transparent = true })
-vim.cmd.colorscheme("onemono-dark")
+vim.cmd.colorscheme("madu-dark")
 check(vim.api.nvim_get_hl(0, { name = "Normal" }).bg == nil, "transparent applied after setup")
 ex.setup({ on_highlights = function(hl) hl.Normal.fg = "#ff0000" end })
-vim.cmd.colorscheme("onemono-dark")
+vim.cmd.colorscheme("madu-dark")
 check(vim.api.nvim_get_hl(0, { name = "Normal" }).fg == 0xff0000, "on_highlights applied")
 
 -- red is reserved for errors: nothing in code or kinds/icons uses it
@@ -70,15 +70,15 @@ for _, v in ipairs({ "light", "dark" }) do
     check(not red or allowed[n] or meaning, ("%s: %s uses red outside errors/deletions"):format(v, n))
   end
   check(c.purple == nil, v .. ": no purple in the palette")
-  check(c.comment ~= c.fg and require("onemono.util").contrast(c.comment, c.bg) >= 4.5, v .. ": comment dimmer than fg, still AA")
+  check(c.comment ~= c.fg and require("madu.util").contrast(c.comment, c.bg) >= 4.5, v .. ": comment dimmer than fg, still AA")
 end
 
 -- ANSI: TUIs draw borders/text in white and put black text on colored
 -- highlights (lazysql, htop), so both must stay readable in both variants
 for _, v in ipairs({ "light", "dark" }) do
   local c = ex.colors(v)
-  local a = require("onemono.terminal").ansi(c)
-  local contrast = require("onemono.util").contrast
+  local a = require("madu.terminal").ansi(c)
+  local contrast = require("madu.util").contrast
   for _, i in ipairs({ 7, 15 }) do
     check(contrast(a[i], c.bg) >= 4.5, ("%s: ansi %d readable on bg"):format(v, i))
   end
@@ -89,7 +89,7 @@ end
 
 -- mono = true: pure monochrome
 ex.setup({ mono = true })
-vim.cmd.colorscheme("onemono-dark")
+vim.cmd.colorscheme("madu-dark")
 local nfg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
 check(vim.api.nvim_get_hl(0, { name = "String", link = false }).fg == nfg, "mono: String in fg")
 check(vim.api.nvim_get_hl(0, { name = "@function.call", link = false }).fg == nfg, "mono: @function.call in fg")

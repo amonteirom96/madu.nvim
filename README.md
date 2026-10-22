@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="onemono" width="100%">
+  <img src="assets/banner.svg" alt="Madu" width="100%">
 </p>
 
 <p align="center">
@@ -16,15 +16,20 @@
 ---
 
 <p align="center">
-  <img src="assets/preview.svg" alt="onemono light and dark" width="100%">
+  <img src="assets/preview.svg" alt="Madu light and dark" width="100%">
 </p>
+
+## Dedication
+
+Madu is named in honor of my wife. This is my perfect theme, just as she is
+perfect for me and our family. Made with love, dedicated to her.
 
 ## Philosophy
 
 Onedark (and its variant [edge](https://github.com/sainnhe/edge)) is a
 beautiful palette, but it paints keywords purple, variables red and
 constants orange. Red code that is not an error is noise, and after a while
-the rainbow stops telling you anything. **onemono** keeps the Onedark
+the rainbow stops telling you anything. **Madu** keeps the Onedark
 backgrounds and hues, and cuts the syntax down to what earns a color:
 
 - **Code is mostly one color.** Keywords, variables, properties, modules and
@@ -66,7 +71,7 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
 
 ## Features
 
-- Two variants, `light` and `dark`, plus `onemono`, which follows
+- Two variants, `light` and `dark`, plus `madu`, which follows
   `'background'`. Neovim 0.10+ detects the terminal background (OSC 11), so the
   theme matches your terminal automatically.
 - **Extreme performance.** Highlights are compiled to stripped LuaJIT
@@ -102,13 +107,13 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
 
 ```lua
 {
-  "amonteirom96/onemono.nvim",
+  "amonteirom96/madu.nvim",
   lazy = false,
   priority = 1000,
   opts = {},
   config = function(_, opts)
-    require("onemono").setup(opts)
-    vim.cmd.colorscheme("onemono")
+    require("madu").setup(opts)
+    vim.cmd.colorscheme("madu")
   end,
 }
 ```
@@ -119,30 +124,30 @@ config, so an update recompiles on its own.
 > [!NOTE]
 > If lazy.nvim fails with `E492: Not an editor command: EssentialCompile`, your
 > spec still has the `build` line from essential.nvim. Remove it (or change it
-> to `":OnemonoCompile"`) and restart Neovim.
+> to `":MaduCompile"`) and restart Neovim.
 
 Native `vim.pack` (Neovim 0.12):
 
 ```lua
-vim.pack.add({ "https://github.com/amonteirom96/onemono.nvim" })
-require("onemono").setup({})
-vim.cmd.colorscheme("onemono")
+vim.pack.add({ "https://github.com/amonteirom96/madu.nvim" })
+require("madu").setup({})
+vim.cmd.colorscheme("madu")
 ```
 
 ### Colorschemes
 
 | Command | Behavior |
 | --- | --- |
-| `:colorscheme onemono` | follows `'background'` (or the `variant` option) |
-| `:colorscheme onemono-light` | always light |
-| `:colorscheme onemono-dark` | always dark |
+| `:colorscheme madu` | follows `'background'` (or the `variant` option) |
+| `:colorscheme madu-light` | always light |
+| `:colorscheme madu-dark` | always dark |
 
 ## Configuration
 
 Calling `setup()` is optional. These are the defaults:
 
 ```lua
-require("onemono").setup({
+require("madu").setup({
   variant = "auto",          -- "auto" (follow 'background') | "light" | "dark"
   transparent = false,       -- no background on Normal, floats and the sign column
   terminal_colors = true,    -- set g:terminal_color_0..15
@@ -178,13 +183,13 @@ require("onemono").setup({
   cache = true,              -- compile to bytecode (turn off only while hacking on the theme)
 
   --- Change the palette before any highlight is built.
-  ---@param colors onemono.Colors
+  ---@param colors madu.Colors
   ---@param variant "light"|"dark"
   on_colors = function(colors, variant) end,
 
   --- Add or change highlight groups.
   ---@param hl table<string, vim.api.keyset.highlight>
-  ---@param colors onemono.Colors
+  ---@param colors madu.Colors
   ---@param variant "light"|"dark"
   on_highlights = function(hl, colors, variant) end,
 })
@@ -195,7 +200,7 @@ require("onemono").setup({
 **Pure monochrome.** No hues in code, and no bold or italic anywhere:
 
 ```lua
-require("onemono").setup({
+require("madu").setup({
   mono = true,
   styles = { comments = {}, keywords = {} },
 })
@@ -205,7 +210,7 @@ require("onemono").setup({
 code (`string`, `func`, `type`, `constant`):
 
 ```lua
-require("onemono").setup({
+require("madu").setup({
   on_colors = function(c)
     c.code.string = c.fg      -- strings back to the code color
     c.code.func = c.cyan      -- functions in cyan
@@ -217,7 +222,7 @@ require("onemono").setup({
 **Darker background and a different accent for matches and prompts:**
 
 ```lua
-require("onemono").setup({
+require("madu").setup({
   on_colors = function(c, variant)
     if variant == "dark" then
       c.bg = "#282c34" -- classic onedark
@@ -230,7 +235,7 @@ require("onemono").setup({
 **Custom statusline groups:**
 
 ```lua
-require("onemono").setup({
+require("madu").setup({
   on_highlights = function(hl, c)
     local modes = {
       Normal = c.blue, Insert = c.green, Visual = c.azure,
@@ -280,9 +285,9 @@ the only hues used in code.
 Use the palette in your own config:
 
 ```lua
-local c = require("onemono").colors()        -- current variant
-local light = require("onemono").colors("light")
-local groups = require("onemono").highlights("dark")
+local c = require("madu").colors()        -- current variant
+local light = require("madu").colors("light")
+local groups = require("madu").highlights("dark")
 ```
 
 ## Extras
@@ -291,14 +296,14 @@ Themes for other tools live in [`extras/`](extras). They are generated from the
 palette and include your `on_colors` overrides when you regenerate them:
 
 ```vim
-:OnemonoExtras [output-dir]
+:MaduExtras [output-dir]
 ```
 
 | Tool | Files | Setup |
 | --- | --- | --- |
-| **Ghostty** | `extras/ghostty/onemono-{light,dark}` | copy to `~/.config/ghostty/themes/`, then `theme = light:onemono-light,dark:onemono-dark` |
-| **Kitty** | `extras/kitty/onemono-{light,dark}.conf` | copy them to `~/.config/kitty/light-theme.auto.conf` and `dark-theme.auto.conf` to follow the OS theme, or `include` one |
-| **Lazygit** | `extras/lazygit/onemono-{light,dark}.yml` | `LG_CONFIG_FILE=~/.config/lazygit/config.yml,~/.config/lazygit/onemono-dark.yml` |
+| **Ghostty** | `extras/ghostty/madu-{light,dark}` | copy to `~/.config/ghostty/themes/`, then `theme = light:madu-light,dark:madu-dark` |
+| **Kitty** | `extras/kitty/madu-{light,dark}.conf` | copy them to `~/.config/kitty/light-theme.auto.conf` and `dark-theme.auto.conf` to follow the OS theme, or `include` one |
+| **Lazygit** | `extras/lazygit/madu-{light,dark}.yml` | `LG_CONFIG_FILE=~/.config/lazygit/config.yml,~/.config/lazygit/madu-dark.yml` |
 
 Lazygit's diff colors come from your terminal's ANSI palette, so they follow the
 Ghostty or Kitty theme automatically. ANSI magenta (5 and 13) is azure, since
@@ -313,9 +318,9 @@ text on colored highlights, so they stay readable in the light theme too.
 
 | Command | Description |
 | --- | --- |
-| `:OnemonoCompile` | Rebuild the bytecode cache. Updates recompile on their own; run it after changing values captured inside an `on_*` closure. |
-| `:OnemonoClearCache` | Delete the cache (`stdpath("cache")/onemono`). |
-| `:OnemonoExtras [dir]` | Generate the Ghostty, Kitty and Lazygit themes. |
+| `:MaduCompile` | Rebuild the bytecode cache. Updates recompile on their own; run it after changing values captured inside an `on_*` closure. |
+| `:MaduClearCache` | Delete the cache (`stdpath("cache")/madu`). |
+| `:MaduExtras [dir]` | Generate the Ghostty, Kitty and Lazygit themes. |
 
 ## Development
 
@@ -327,12 +332,12 @@ nvim --headless -u NONE --cmd "set rtp^=." -l tests/smoke.lua
 # load-time benchmark
 nvim --headless -u NONE --cmd "set rtp^=." -l scripts/bench.lua
 # regenerate extras and README images from the palette
-nvim --headless -u NONE --cmd "set rtp^=." -c "lua require('onemono').extras()" -c q
+nvim --headless -u NONE --cmd "set rtp^=." -c "lua require('madu').extras()" -c q
 nvim --headless -u NONE --cmd "set rtp^=." -l scripts/assets.lua
 ```
 
 When you change highlight definitions, bump `M.version` in
-`lua/onemono/init.lua`. This invalidates every user's compiled cache.
+`lua/madu/init.lua`. This invalidates every user's compiled cache.
 
 ## Credits
 
