@@ -308,6 +308,9 @@ palette and include your `on_colors` overrides when you regenerate them:
 | **Ghostty** | `extras/ghostty/madu-{light,dark}` | copy to `~/.config/ghostty/themes/`, then `theme = light:madu-light,dark:madu-dark` |
 | **Kitty** | `extras/kitty/madu-{light,dark}.conf` | copy them to `~/.config/kitty/light-theme.auto.conf` and `dark-theme.auto.conf` to follow the OS theme, or `include` one |
 | **Lazygit** | `extras/lazygit/madu-{light,dark}.yml` | `LG_CONFIG_FILE=~/.config/lazygit/config.yml,~/.config/lazygit/madu-dark.yml` |
+| **Claude Code** | `extras/claude/madu-{light,dark}.json` | copy to `~/.claude/themes/`, then select with `/theme` |
+| **Codex CLI** | `extras/codex/madu-{light,dark}.tmTheme` | copy to `${CODEX_HOME:-~/.codex}/themes/`, then select with `/theme` |
+| **Gemini CLI** | `extras/gemini/madu-{light,dark}.json` | copy to `~/.gemini/themes/`, then set `ui.theme` to the absolute file path |
 
 Lazygit's diff colors come from your terminal's ANSI palette, so they follow the
 Ghostty or Kitty theme automatically. ANSI magenta (5 and 13) is azure, since
@@ -324,7 +327,7 @@ text on colored highlights, so they stay readable in the light theme too.
 | --- | --- |
 | `:MaduCompile` | Rebuild the bytecode cache. Updates recompile on their own; run it after changing values captured inside an `on_*` closure. |
 | `:MaduClearCache` | Delete the cache (`stdpath("cache")/madu`). |
-| `:MaduExtras [dir]` | Generate the Ghostty, Kitty and Lazygit themes. |
+| `:MaduExtras [dir]` | Generate the Ghostty, Kitty, Lazygit, Claude Code, Codex CLI and Gemini CLI themes. |
 
 ## Development
 

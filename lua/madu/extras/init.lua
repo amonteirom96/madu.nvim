@@ -11,6 +11,9 @@ local M = {}
 
 --- tool -> module
 M.tools = {
+  claude = "madu.extras.claude",
+  codex = "madu.extras.codex",
+  gemini = "madu.extras.gemini",
   ghostty = "madu.extras.ghostty",
   kitty = "madu.extras.kitty",
   lazygit = "madu.extras.lazygit",

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict><key>name</key><string>madu-light</string>
+<key>settings</key><array><dict><key>settings</key>
+<dict>
+<key>background</key><string>#fdf6e3</string>
+<key>caret</key><string>#52676f</string>
+<key>foreground</key><string>#52676f</string>
+<key>selection</key><string>#e5e2d3</string>
+</dict>
+</dict>
+<dict><key>scope</key><string>comment</string><key>settings</key><dict>
+<key>foreground</key><string>#5b6e75</string>
+</dict></dict>
+<dict><key>scope</key><string>string</string><key>settings</key><dict>
+<key>foreground</key><string>#616f00</string>
+</dict></dict>
+<dict><key>scope</key><string>entity.name.function, support.function</string><key>settings</key><dict>
+<key>foreground</key><string>#1e6da5</string>
+</dict></dict>
+<dict><key>scope</key><string>entity.name.type, entity.name.class, support.type, support.class</string><key>settings</key><dict>
+<key>foreground</key><string>#846400</string>
+</dict></dict>
+<dict><key>scope</key><string>constant</string><key>settings</key><dict>
+<key>foreground</key><string>#b64314</string>
+</dict></dict>
+<dict><key>scope</key><string>keyword, storage, variable</string><key>settings</key><dict>
+<key>foreground</key><string>#52676f</string>
+</dict></dict>
+<dict><key>scope</key><string>markup.inserted</string><key>settings</key><dict>
+<key>foreground</key><string>#616f00</string>
+</dict></dict>
+<dict><key>scope</key><string>markup.deleted, invalid</string><key>settings</key><dict>
+<key>foreground</key><string>#c62d2a</string>
+</dict></dict>
+<dict><key>scope</key><string>markup.changed</string><key>settings</key><dict>
+<key>foreground</key><string>#1e6da5</string>
+</dict></dict>
+<dict><key>scope</key><string>markup.heading, markup.underline.link</string><key>settings</key><dict>
+<key>foreground</key><string>#1e6da5</string>
+</dict></dict>
+</array></dict></plist>
