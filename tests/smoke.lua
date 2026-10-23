@@ -102,7 +102,7 @@ for _, v in ipairs({ "light", "dark" }) do
   for _, name in ipairs({ "red", "orange", "yellow", "green", "cyan", "azure", "blue" }) do
     local r, g, b = util.rgb(c[name])
     check(c[name] ~= original[name] and c[name] ~= c.fg, v .. ": monochrome retains " .. name .. " tint")
-    check(math.max(r, g, b) - math.min(r, g, b) <= 45, v .. ": narrow chroma for " .. name)
+    check(math.max(r, g, b) - math.min(r, g, b) <= 70, v .. ": narrow chroma for " .. name)
     check(util.contrast(c[name], c.select) >= 4.5, v .. ": readable monochrome " .. name)
     check(v == "dark" and util.luminance(c[name]) > util.luminance(original[name])
       or v == "light" and util.luminance(c[name]) < util.luminance(original[name]), v .. ": monochrome tone for " .. name)

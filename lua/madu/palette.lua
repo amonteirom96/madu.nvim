@@ -97,13 +97,13 @@ function M.get(variant, opts)
   -- Raised popups use an existing surface, keeping the palette intact.
   c.surface_float = c.surface1
   -- Keep surfaces intact, but bring text and accents into a narrow tonal range.
-  -- A quarter of each original hue remains visible against a neutral anchor.
+  -- Keep 40% of each original hue visible against a neutral anchor.
   -- Apply before semantic aliases so code, plugins, diagnostics and ANSI agree.
   if opts.mono then
     local neutral = is_light and "#303030" or "#dedede"
     c.fg = neutral
     for _, name in ipairs({ "red", "orange", "yellow", "green", "cyan", "azure", "blue" }) do
-      c[name] = blend(c[name], neutral, 0.25)
+      c[name] = blend(c[name], neutral, 0.40)
     end
   end
 
