@@ -87,14 +87,36 @@ for _, v in ipairs({ "light", "dark" }) do
   end
 end
 
--- mono = true: pure monochrome
-ex.setup({ mono = true })
-vim.cmd.colorscheme("madu-dark")
-local nfg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
-check(vim.api.nvim_get_hl(0, { name = "String", link = false }).fg == nfg, "mono: String in fg")
-check(vim.api.nvim_get_hl(0, { name = "@function.call", link = false }).fg == nfg, "mono: @function.call in fg")
-check(vim.api.nvim_get_hl(0, { name = "@type", link = false }).fg == nfg, "mono: @type in fg")
-check(vim.api.nvim_get_hl(0, { name = "@constant.builtin", link = false }).fg == nfg, "mono: @constant.builtin in fg")
+-- monochrome keeps hue distinctions, surfaces and readable contrast in both variants.
+local util = require("madu.util")
+for _, v in ipairs({ "light", "dark" }) do
+  ex.setup({})
+  local original = ex.colors(v)
+  local default_hash = require("madu.config").hash()
+  ex.setup({ mono = true })
+  check(require("madu.config").hash() ~= default_hash, v .. ": monochrome changes cache key")
+  local c = ex.colors(v)
+  for _, name in ipairs({ "bg", "surface1", "surface2", "surface3", "border", "comment" }) do
+    check(c[name] == original[name], v .. ": monochrome preserves " .. name)
+  end
+  for _, name in ipairs({ "red", "orange", "yellow", "green", "cyan", "azure", "blue" }) do
+    local r, g, b = util.rgb(c[name])
+    check(c[name] ~= original[name] and c[name] ~= c.fg, v .. ": monochrome retains " .. name .. " tint")
+    check(math.max(r, g, b) - math.min(r, g, b) <= 45, v .. ": narrow chroma for " .. name)
+    check(util.contrast(c[name], c.select) >= 4.5, v .. ": readable monochrome " .. name)
+    check(v == "dark" and util.luminance(c[name]) > util.luminance(original[name])
+      or v == "light" and util.luminance(c[name]) < util.luminance(original[name]), v .. ": monochrome tone for " .. name)
+  end
+  check(c.code.string ~= c.code.func and c.code.type ~= c.code.constant, v .. ": code hues remain distinct")
+  for _, cache in ipairs({ false, true }) do
+    ex.setup({ mono = true, cache = cache })
+    vim.cmd.colorscheme("madu-" .. v)
+    check(vim.api.nvim_get_hl(0, { name = "String", link = false }).fg == tonumber(c.green:sub(2), 16), v .. ": monochrome loaded")
+    check(vim.g.terminal_color_1 == c.red, v .. ": monochrome ANSI")
+  end
+  ex.setup({ mono = true, on_colors = function(colors) colors.code.string = "#123456" end })
+  check(ex.colors(v).code.string == "#123456", v .. ": callback overrides monochrome")
+end
 ex.setup({})
 
 -- highlights never produce invalid specs

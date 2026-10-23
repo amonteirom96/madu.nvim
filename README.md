@@ -44,8 +44,7 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
 
   Everything else is told apart by shape. Keywords are bold; comments are
   italic and a step dimmer than the code (still WCAG AA), and you can change
-  both. Set `mono = true` for pure
-  monochrome.
+  both. Set `mono = true` for subtle, near-neutral hues.
 - **Dark Markdown uses the same four hues.** Light Markdown follows Solarized with monochrome text. Headings vary by level (blue, yellow,
   green, orange, blue, yellow); links are blue, inline code and quotes green,
   bold text and list markers orange, and italic text yellow.
@@ -153,7 +152,7 @@ require("madu").setup({
   terminal_colors = true,    -- set g:terminal_color_0..15
   dim_inactive = false,      -- slightly different background on unfocused windows
   muted_comments = false,    -- comments even fainter, in the muted UI tone
-  mono = false,              -- all code in the foreground color (pure monochrome)
+  mono = false,              -- subtle hues: pale in dark, deep in light
   float = {
     -- solid defaults to false in light, true in dark
     -- solid = true,          -- override for both variants
@@ -197,14 +196,19 @@ require("madu").setup({
 
 ### Examples
 
-**Pure monochrome.** No hues in code, and no bold or italic anywhere:
+**Soft monochrome with visible hues.** Keep the original color families close
+in tone: pale, nearly white accents in dark mode and deep, nearly black accents
+in light mode. Backgrounds and UI surfaces stay the same; code, icons, Git,
+diagnostics and terminal colors use the softened palette.
 
 ```lua
 require("madu").setup({
   mono = true,
-  styles = { comments = {}, keywords = {} },
 })
 ```
+
+`mono` defaults to `false`. Colors remain distinct rather than becoming a
+single foreground color. Color callbacks run after the softened palette is built.
 
 **Change which tokens get a color.** `c.code` holds the only four hues used in
 code (`string`, `func`, `type`, `constant`):

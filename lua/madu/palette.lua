@@ -96,18 +96,28 @@ function M.get(variant, opts)
   c.bg_float = is_light and c.bg or c.surface1
   -- Raised popups use an existing surface, keeping the palette intact.
   c.surface_float = c.surface1
+  -- Keep surfaces intact, but bring text and accents into a narrow tonal range.
+  -- A quarter of each original hue remains visible against a neutral anchor.
+  -- Apply before semantic aliases so code, plugins, diagnostics and ANSI agree.
+  if opts.mono then
+    local neutral = is_light and "#303030" or "#dedede"
+    c.fg = neutral
+    for _, name in ipairs({ "red", "orange", "yellow", "green", "cyan", "azure", "blue" }) do
+      c[name] = blend(c[name], neutral, 0.25)
+    end
+  end
+
   -- Use the palette blue for UI matches and prompts.
   c.accent = c.blue
   -- Tinted accent, same hue family as the UI so it stays clean. Stronger than
   -- surface3 so it reads apart from Visual.
   c.search = blend(c.accent, c.bg, is_light and 0.25 or 0.32)
 
-  local mono = opts.mono
   c.code = {
-    string = mono and c.fg or c.green,
-    func = mono and c.fg or c.blue,
-    type = mono and c.fg or c.yellow,
-    constant = mono and c.fg or c.orange,
+    string = c.green,
+    func = c.blue,
+    type = c.yellow,
+    constant = c.orange,
   }
   c.git = { add = c.green, change = c.blue, delete = c.red }
   c.diag = { error = c.red, warn = c.yellow, info = c.blue, hint = c.cyan, ok = c.green }

@@ -45,8 +45,14 @@ for _, variant in ipairs({ "light", "dark" }) do
   end
   madu.setup({ mono = true, cache = false })
   vim.cmd.colorscheme("madu-" .. variant)
-  for _, group in ipairs({ "@constructor.tsx", "@lsp.type.interface", "@lsp.typemod.type.defaultLibrary", "@variable.parameter.builtin" }) do
-    check(vim.api.nvim_get_hl(0, { name = group, link = false }).fg == tonumber(madu.colors(variant).fg:sub(2), 16), "mono " .. group)
+  local c = madu.colors(variant)
+  for group, color in pairs({
+    ["@constructor.tsx"] = c.yellow,
+    ["@lsp.type.interface"] = c.code.type,
+    ["@lsp.typemod.type.defaultLibrary"] = c.code.type,
+    ["@variable.parameter.builtin"] = c.fg,
+  }) do
+    check(vim.api.nvim_get_hl(0, { name = group, link = false }).fg == tonumber(color:sub(2), 16), "mono " .. group)
   end
 end
 madu.setup({ integrations = { telescope = false, blink = false, mini = false, treesitter = false, semantic_tokens = false } })
