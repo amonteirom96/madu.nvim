@@ -2,7 +2,7 @@
 local M = {}
 
 --- Bump to invalidate every user's compiled cache after changing highlights.
-M.version = "1.6.1"
+M.version = "1.6.2"
 
 local cache_dir = vim.fn.stdpath("cache") .. "/madu"
 local configured = false
