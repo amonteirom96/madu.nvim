@@ -96,6 +96,9 @@ for _, v in ipairs({ "light", "dark" }) do
   ex.setup({ mono = true })
   check(require("madu.config").hash() ~= default_hash, v .. ": monochrome changes cache key")
   local c = ex.colors(v)
+  for _, name in ipairs({ "add", "change", "delete" }) do
+    check(c.git[name] == original.git[name], v .. ": monochrome preserves git " .. name)
+  end
   for _, name in ipairs({ "bg", "surface1", "surface2", "surface3", "border", "comment" }) do
     check(c[name] == original[name], v .. ": monochrome preserves " .. name)
   end
@@ -113,6 +116,10 @@ for _, v in ipairs({ "light", "dark" }) do
     vim.cmd.colorscheme("madu-" .. v)
     check(vim.api.nvim_get_hl(0, { name = "String", link = false }).fg == tonumber(c.green:sub(2), 16), v .. ": monochrome loaded")
     check(vim.g.terminal_color_1 == c.red, v .. ": monochrome ANSI")
+    for group, name in pairs({ GitSignsAdd = "add", GitSignsChange = "change", GitSignsDelete = "delete" }) do
+      check(vim.api.nvim_get_hl(0, { name = group, link = false }).fg == tonumber(original.git[name]:sub(2), 16),
+        v .. ": monochrome preserves " .. group)
+    end
   end
   ex.setup({ mono = true, on_colors = function(colors) colors.code.string = "#123456" end })
   check(ex.colors(v).code.string == "#123456", v .. ": callback overrides monochrome")
