@@ -44,7 +44,7 @@ backgrounds and hues, and cuts the syntax down to what earns a color:
 
   Everything else is told apart by shape. Keywords are bold; comments are
   italic and a step dimmer than the code (still WCAG AA), and you can change
-  both. Set `mono = true` for subtle, near-neutral hues.
+  both. Set `mono = true` for monochrome code while keeping the UI colored.
 - **Dark Markdown uses the same four hues.** Light Markdown follows Solarized with monochrome text. Headings vary by level (blue, yellow,
   green, orange, blue, yellow); links are blue, inline code and quotes green,
   bold text and list markers orange, and italic text yellow.
@@ -152,7 +152,7 @@ require("madu").setup({
   terminal_colors = true,    -- set g:terminal_color_0..15
   dim_inactive = false,      -- slightly different background on unfocused windows
   muted_comments = false,    -- comments even fainter, in the muted UI tone
-  mono = false,              -- subtle hues: pale in dark, deep in light
+  mono = false,              -- monochrome code, preserving UI colors
   float = {
     -- solid defaults to false in light, true in dark
     -- solid = true,          -- override for both variants
@@ -196,10 +196,10 @@ require("madu").setup({
 
 ### Examples
 
-**Soft monochrome with visible hues.** Keep the original color families close
-in tone: pale, nearly white accents in dark mode and deep, nearly black accents
-in light mode. Backgrounds and UI surfaces stay the same; code, icons, Git,
-diagnostics and terminal colors use the softened palette.
+**Monochrome code with a colored interface.** Strings, functions, types and
+constants use the normal code foreground. Pickers, statuslines, folders, icons,
+Git, diagnostics and terminal colors keep their original palette. Comments
+remain dimmed and token styles still apply.
 
 ```lua
 require("madu").setup({
@@ -207,8 +207,8 @@ require("madu").setup({
 })
 ```
 
-`mono` defaults to `false`. Colors remain distinct rather than becoming a
-single foreground color. Color callbacks run after the softened palette is built.
+`mono` defaults to `false`. Color callbacks run after the monochrome code
+palette is built, so individual syntax colors can still be overridden.
 
 **Change which tokens get a color.** `c.code` holds the only four hues used in
 code (`string`, `func`, `type`, `constant`):

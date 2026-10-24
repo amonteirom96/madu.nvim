@@ -96,18 +96,7 @@ function M.get(variant, opts)
   c.bg_float = is_light and c.bg or c.surface1
   -- Raised popups use an existing surface, keeping the palette intact.
   c.surface_float = c.surface1
-  -- Git status colors keep their original meaning in monochrome mode.
   c.git = { add = c.green, change = c.blue, delete = c.red }
-  -- Keep surfaces intact, but bring text and accents into a narrow tonal range.
-  -- Keep 40% of each original hue visible against a neutral anchor.
-  -- Apply before the remaining semantic aliases so code, plugins, diagnostics and ANSI agree.
-  if opts.mono then
-    local neutral = is_light and "#303030" or "#dedede"
-    c.fg = neutral
-    for _, name in ipairs({ "red", "orange", "yellow", "green", "cyan", "azure", "blue" }) do
-      c[name] = blend(c[name], neutral, 0.40)
-    end
-  end
 
   -- Use the palette blue for UI matches and prompts.
   c.accent = c.blue
@@ -121,6 +110,12 @@ function M.get(variant, opts)
     type = c.yellow,
     constant = c.orange,
   }
+  -- Monochrome is a syntax option; UI, diagnostics and ANSI keep their colors.
+  if opts.mono then
+    for role in pairs(c.code) do
+      c.code[role] = c.fg
+    end
+  end
   c.diag = { error = c.red, warn = c.yellow, info = c.blue, hint = c.cyan, ok = c.green }
 
   if opts.on_colors then

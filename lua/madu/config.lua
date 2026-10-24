@@ -9,7 +9,7 @@ local M = {}
 ---@field terminal_colors? boolean              set g:terminal_color_0..15
 ---@field dim_inactive? boolean                 slightly different bg on unfocused windows
 ---@field muted_comments? boolean               comments even fainter, in the muted UI tone
----@field mono? boolean                         near-neutral hues, pale in dark and deep in light
+---@field mono? boolean                         monochrome code, preserving UI colors
 ---@field float? { solid?: boolean }            solid = raised background with a subtle border
 ---@field styles? table<"comments"|"keywords"|"functions"|"variables"|"strings"|"types"|"constants"|"operators", madu.Style>
 ---@field integrations? table<string, boolean> original keys and names in groups/support_modules.lua

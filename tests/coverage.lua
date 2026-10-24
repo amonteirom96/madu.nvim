@@ -47,7 +47,7 @@ for _, variant in ipairs({ "light", "dark" }) do
   vim.cmd.colorscheme("madu-" .. variant)
   local c = madu.colors(variant)
   for group, color in pairs({
-    ["@constructor.tsx"] = c.yellow,
+    ["@constructor.tsx"] = c.code.type,
     ["@lsp.type.interface"] = c.code.type,
     ["@lsp.typemod.type.defaultLibrary"] = c.code.type,
     ["@variable.parameter.builtin"] = c.fg,

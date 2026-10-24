@@ -87,35 +87,39 @@ for _, v in ipairs({ "light", "dark" }) do
   end
 end
 
--- monochrome keeps hue distinctions, surfaces and readable contrast in both variants.
-local util = require("madu.util")
+-- Monochrome changes syntax only; UI palettes and resolved highlights stay intact.
 for _, v in ipairs({ "light", "dark" }) do
   ex.setup({})
   local original = ex.colors(v)
+  vim.cmd.colorscheme("madu-" .. v)
+  local ui = {}
+  for _, group in ipairs({ "Normal", "Directory", "TelescopePromptTitle", "SnacksPickerInputTitle", "MiniFilesDirectory", "MiniIconsBlue", "MiniPickMatchRanges", "StModeNormal", "MiniStatuslineModeInsert", "DiagnosticError", "BlinkCmpKindFunction" }) do
+    ui[group] = vim.api.nvim_get_hl(0, { name = group, link = false })
+    check(next(ui[group]) ~= nil, v .. ": UI group exists " .. group)
+  end
   local default_hash = require("madu.config").hash()
   ex.setup({ mono = true })
   check(require("madu.config").hash() ~= default_hash, v .. ": monochrome changes cache key")
   local c = ex.colors(v)
-  for _, name in ipairs({ "add", "change", "delete" }) do
-    check(c.git[name] == original.git[name], v .. ": monochrome preserves git " .. name)
+  local unchanged = vim.deepcopy(c)
+  unchanged.code = original.code
+  check(vim.deep_equal(unchanged, original), v .. ": monochrome preserves all UI colors")
+  for role, color in pairs(c.code) do
+    check(color == c.fg, v .. ": monochrome syntax " .. role)
   end
-  for _, name in ipairs({ "bg", "surface1", "surface2", "surface3", "border", "comment" }) do
-    check(c[name] == original[name], v .. ": monochrome preserves " .. name)
-  end
-  for _, name in ipairs({ "red", "orange", "yellow", "green", "cyan", "azure", "blue" }) do
-    local r, g, b = util.rgb(c[name])
-    check(c[name] ~= original[name] and c[name] ~= c.fg, v .. ": monochrome retains " .. name .. " tint")
-    check(math.max(r, g, b) - math.min(r, g, b) <= 70, v .. ": narrow chroma for " .. name)
-    check(util.contrast(c[name], c.select) >= 4.5, v .. ": readable monochrome " .. name)
-    check(v == "dark" and util.luminance(c[name]) > util.luminance(original[name])
-      or v == "light" and util.luminance(c[name]) < util.luminance(original[name]), v .. ": monochrome tone for " .. name)
-  end
-  check(c.code.string ~= c.code.func and c.code.type ~= c.code.constant, v .. ": code hues remain distinct")
   for _, cache in ipairs({ false, true }) do
     ex.setup({ mono = true, cache = cache })
     vim.cmd.colorscheme("madu-" .. v)
-    check(vim.api.nvim_get_hl(0, { name = "String", link = false }).fg == tonumber(c.green:sub(2), 16), v .. ": monochrome loaded")
+    check(vim.api.nvim_get_hl(0, { name = "String", link = false }).fg == tonumber(c.fg:sub(2), 16), v .. ": monochrome loaded")
     check(vim.g.terminal_color_1 == c.red, v .. ": monochrome ANSI")
+    for group, spec in pairs(ui) do
+      check(vim.deep_equal(vim.api.nvim_get_hl(0, { name = group, link = false }), spec),
+        v .. ": monochrome preserves UI " .. group)
+    end
+    for _, group in ipairs({ "Function", "Type", "Number", "@constructor.tsx", "@lsp.type.interface" }) do
+      check(vim.api.nvim_get_hl(0, { name = group, link = false }).fg == tonumber(c.fg:sub(2), 16),
+        v .. ": monochrome syntax " .. group)
+    end
     for group, name in pairs({ GitSignsAdd = "add", GitSignsChange = "change", GitSignsDelete = "delete" }) do
       check(vim.api.nvim_get_hl(0, { name = group, link = false }).fg == tonumber(original.git[name]:sub(2), 16),
         v .. ": monochrome preserves " .. group)

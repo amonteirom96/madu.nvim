@@ -88,7 +88,8 @@ on_colors(colors, variant)
                                                                *madu-mono*
 mono
     When true, strings, functions, types and constants use `fg` like the
-    rest of the code.
+    rest of the code. Pickers, statuslines, folders, icons, diagnostics, Git
+    and terminal colors keep their original palette.
 
                                                       *madu-on_highlights*
 on_highlights(hl, colors, variant)
