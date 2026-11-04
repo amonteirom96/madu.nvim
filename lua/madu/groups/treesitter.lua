@@ -106,16 +106,5 @@ return function(c, o)
     ["@diff.minus"] = { fg = c.git.delete },
     ["@diff.delta"] = { fg = c.git.change },
   }
-  -- Solarized light keeps markup monochrome; dark retains its four hues.
-  if c.variant == "light" then
-    hl["@markup.strong"] = { bold = true }
-    hl["@markup.italic"] = { italic = true }
-    for _, name in ipairs({ "heading", "quote", "math", "link", "link.label", "link.url", "raw", "list" }) do
-      hl["@markup." .. name].fg = fg
-    end
-    for level = 1, 6 do
-      hl["@markup.heading." .. level] = nil
-    end
-  end
   return hl
 end
