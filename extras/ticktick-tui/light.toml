@@ -1,0 +1,16 @@
+# madu — mesmas cores do Ghostty/lazygit (ghostty/themes/light)
+# Carregado automaticamente em terminal claro e por `:theme light`
+[theme]
+background = "#fdf6e3"
+panel = "#f4efdd"
+foreground = "#52676f"
+muted = "#7b898b"
+border = "#d4d4c7"
+heading = "#39484e"
+accent = "#1e6da5"
+selection = "#e5e2d3"
+danger = "#c62d2a"
+success = "#616f00"
+code = "#1e746e"
+code_background = "#efebda"
+

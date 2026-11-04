@@ -1,0 +1,16 @@
+# madu — mesmas cores do Ghostty/lazygit (ghostty/themes/dark)
+# Carregado por `:theme dark` (named_theme lê ~/.config/ticktick-tui/theme-dark.toml)
+[theme]
+background = "#232833"
+panel = "#2b313e"
+foreground = "#c5cdd9"
+muted = "#9299a5"
+border = "#42485a"
+heading = "#dce1e8"
+accent = "#6cb6eb"
+selection = "#353b4a"
+danger = "#f5898e"
+success = "#a0c980"
+code = "#5dbbc1"
+code_background = "#2f3442"
+
