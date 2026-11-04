@@ -2,7 +2,7 @@
 # Carregado automaticamente em terminal claro e por `:theme light`
 [theme]
 background = "#fdf6e3"
-panel = "#f4efdd"
+panel = "#fdf6e3"
 foreground = "#52676f"
 muted = "#7b898b"
 border = "#d4d4c7"

@@ -2,7 +2,7 @@
 # Carregado por `:theme dark` (named_theme lê ~/.config/ticktick-tui/theme-dark.toml)
 [theme]
 background = "#232833"
-panel = "#2b313e"
+panel = "#232833"
 foreground = "#c5cdd9"
 muted = "#9299a5"
 border = "#42485a"
