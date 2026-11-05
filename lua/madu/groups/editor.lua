@@ -72,7 +72,7 @@ return function(c, o)
     CurSearch = { fg = c.bg, bg = c.accent, bold = true },
     IncSearch = { fg = c.bg, bg = c.accent, bold = true },
     Substitute = { fg = c.bg, bg = c.orange, bold = true },
-    MatchParen = { fg = c.orange, bg = blend(c.orange, c.bg, 0.18), bold = true },
+    MatchParen = { fg = c.accent, bg = blend(c.accent, c.bg, 0.18), bold = true },
 
     -- Windows, bars ----------------------------------------------------------
     WinSeparator = { fg = c.border, bg = bg },
