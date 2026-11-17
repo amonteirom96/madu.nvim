@@ -5,6 +5,9 @@ local util = require("madu.util")
 return function(c, o)
   local blend = util.blend
   local bg = o.transparent and c.none or c.bg
+  -- The terminal supplies the background in transparent mode; the usual
+  -- subtle surfaces can disappear against it. Give text selections more weight.
+  local visual_bg = o.transparent and blend(c.fg, c.bg, c.variant == "light" and 0.22 or 0.26) or c.surface3
   local solid = o.float.solid
   if solid == nil then solid = c.variant == "dark" end
   local float_bg = o.transparent and c.none or (solid and c.surface_float or c.bg_float)
@@ -66,8 +69,8 @@ return function(c, o)
     QuickFixLine = { bg = c.select, bold = true },
 
     -- Selection & search (color here helps you find things) ------------------
-    Visual = { bg = c.surface3 },
-    VisualNOS = { bg = c.surface2 },
+    Visual = { bg = visual_bg },
+    VisualNOS = { bg = o.transparent and visual_bg or c.surface2 },
     Search = { fg = c.fg, bg = c.search },
     CurSearch = { fg = c.bg, bg = c.accent, bold = true },
     IncSearch = { fg = c.bg, bg = c.accent, bold = true },
