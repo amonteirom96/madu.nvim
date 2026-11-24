@@ -8,7 +8,10 @@ return function(c, o)
   -- The terminal supplies the background in transparent mode; the usual
   -- subtle surfaces can disappear against it. Keep the cursor line visible
   -- while giving text selections a stronger highlight.
-  local cursor_bg = o.transparent and blend(c.fg, c.bg, c.variant == "light" and 0.10 or 0.13) or c.surface1
+  local cursor_bg = o.transparent and blend(c.fg, c.bg, 0.13) or c.surface1
+  if c.variant == "light" then
+    cursor_bg = blend(c.fg, c.bg, o.transparent and 0.05 or 0.03)
+  end
   local visual_bg = o.transparent and blend(c.fg, c.bg, c.variant == "light" and 0.22 or 0.26) or c.surface3
   local solid = o.float.solid
   if solid == nil then solid = c.variant == "dark" end
